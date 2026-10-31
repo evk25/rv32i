@@ -3,3 +3,9 @@ dump.vcd
 tb/ip/*
 tb/screenshot/*
 .DS_Store
+
+rv32i.cache/
+rv32i.hw/
+rv32i.ip_user_files/
+rv32i.runs/
+rv32i.sim/
