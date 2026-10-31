@@ -1,0 +1,4 @@
+build/
+dump.vcd
+tb/ip/*
+tb/screenshot/*
