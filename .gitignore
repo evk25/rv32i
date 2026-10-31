@@ -2,3 +2,4 @@ build/
 dump.vcd
 tb/ip/*
 tb/screenshot/*
+.DS_Store
