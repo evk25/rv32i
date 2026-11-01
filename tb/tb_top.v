@@ -9,11 +9,19 @@ module tb_top();
 
     always #1 clk = ~clk;
 
-    SingleCycleProcessor #(
+    // SingleCycleProcessor #(
+    //     .MEM_FILE(MEM_FILE)
+    // ) uut (
+    //     .clk  (clk),
+    //     .rst  (rst),
+    //     .Halt (Halt)
+    // );
+
+    MultiCycleProcessor #(
         .MEM_FILE(MEM_FILE)
     ) uut (
-        .clk  (clk),
-        .rst  (rst),
+        .clk (clk),
+        .rst (rst),
         .Halt (Halt)
     );
 

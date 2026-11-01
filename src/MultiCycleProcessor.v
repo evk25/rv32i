@@ -70,7 +70,15 @@ module MultiCycleProcessor #(
     end
 
 
-    initial PC = 32'b0; 
+    initial begin
+        PC = 32'b0; 
+        OldPC = 32'b0;
+        Instr = 32'b0;
+        A = 32'b0;
+        B = 32'b0;
+        ALUOut = 32'b0;
+        Data = 32'b0;
+    end
     
     always @(posedge clk) begin
         if (rst) begin

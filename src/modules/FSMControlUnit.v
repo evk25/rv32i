@@ -29,7 +29,8 @@ module FSMControlUnit (
 
 
     // State Regs & init
-    reg [2:0] current_state = ST_IF, next_state = ST_IF;
+    reg [2:0] current_state, next_state;
+    initial current_state = ST_IF;
 
     always @(posedge clk) begin
         if (rst)
@@ -46,7 +47,7 @@ module FSMControlUnit (
     wire op_5 = op[5];
     wire funct7_5 = Instr[30];
 
-    reg [1:0] ALUOp = 2'b00;
+    reg [1:0] ALUOp;
 
     assign PCWrite = PCUpdate | (Branch & (Instr[12] ? ~Zero : Zero));
 
