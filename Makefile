@@ -7,6 +7,7 @@ IVERILOG   = iverilog -g2012 -I src/modules
 
 MODULES    = $(filter-out src/modules/template_module.v, $(wildcard src/modules/*.v))
 SRC        = src/SingleCycleProcessor.v $(MODULES) tb/tb_top.v
+# SRC        = src/MultiCycleProcessor.v $(MODULES) tb/tb_top.v
 
 # Default target
 all: run

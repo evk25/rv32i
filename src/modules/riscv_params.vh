@@ -50,3 +50,12 @@ localparam [1:0] RESULT_SRC_PCPL = 2'b10;
 // Program Counter Source Mux
 localparam PC_SRC_INCRMT = 1'b0;
 localparam PC_SRC_TARGET = 1'b1;
+
+// ALUSrcA Mux
+localparam [1:0] ALU_SRCA_PC    = 2'b00;
+localparam [1:0] ALU_SRCA_OLDPC = 2'b01;
+localparam [1:0] ALU_SRCA_REG   = 2'b10;
+// ALUSrcB Mux
+localparam [1:0] ALU_SRCB_REG   = 2'b00;
+localparam [1:0] ALU_SRCB_IMM   = 2'b01;
+localparam [1:0] ALU_SRCB_FOUR  = 2'b10;
