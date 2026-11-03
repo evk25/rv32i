@@ -4,13 +4,15 @@ module MultiCycleProcessor #(
 ) (
     input wire clk,
     input wire rst,
-    output wire Halt
+    output wire Halt,
+    output reg [31:0] PC,
+    output reg [31:0] Result
 );
 
 	`include "riscv_params.vh"
 
     // PC & Fetch
-    reg [31:0] PC, OldPC, Instr, A, B, ALUOut, Data, Result, SrcA, SrcB;
+    reg [31:0] OldPC, Instr, A, B, ALUOut, Data, SrcA, SrcB;
     wire [31:0] PCNext, PCPlus4, PCTarget;
     // wire [31:0] Instr;
 
@@ -101,13 +103,14 @@ module MultiCycleProcessor #(
     end
 
     // Module Instantiation
+    (* dont_touch = "true" *) 
     InstructionMemory #(
         .MEM_FILE(MEM_FILE)
     ) u_inst_mem (
         .A (PC),
         .RD (InstrMemOut)
     );
-
+    (* dont_touch = "true" *) 
     RegisterFile u_reg_file (
         .clk (clk),
         .WE3 (RegWrite),
@@ -118,13 +121,13 @@ module MultiCycleProcessor #(
         .RD1 (RD1),
         .RD2 (RD2)
     );
-
+    (* dont_touch = "true" *) 
     ImmGen u_imm_gen (
         .Instr (Instr),
         .ImmSrc (ImmSrc),
         .ImmExt (ImmExt)
     );
-
+    (* dont_touch = "true" *) 
     ALU u_alu (
         .SrcA (SrcA),
         .SrcB (SrcB),
@@ -132,7 +135,7 @@ module MultiCycleProcessor #(
         .ALUResult (ALUResult),
         .Zero (Zero)
     );
-
+    (* dont_touch = "true" *) 
     DataMemory u_memory (
         .clk (clk),
         .WE (MemWrite),

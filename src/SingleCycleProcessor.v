@@ -4,12 +4,14 @@ module SingleCycleProcessor #(
 ) (
     input wire clk,
     input wire rst,
-    output wire Halt
+    output wire Halt,
+    output reg [31:0] PC,
+    output reg [31:0] Result
 );
 	`include "riscv_params.vh"
 
     // PC & Fetch
-    reg [31:0] PC;
+    // reg [31:0] PC;
     wire [31:0] PCNext, PCPlus4, PCTarget;
     wire [31:0] Instr;
 
@@ -24,7 +26,7 @@ module SingleCycleProcessor #(
 
     // Memory
     wire [31:0] ReadData;
-    reg [31:0] Result; // reg so I can use a case block for cleanliness
+    // reg [31:0] Result; // reg so I can use a case block for cleanliness
 
     // ============= IF ============= 
     initial PC = 32'b0; 
@@ -36,7 +38,7 @@ module SingleCycleProcessor #(
 
     assign PCPlus4 = PC + 32'd4;
 
-        
+    (* dont_touch = "true" *)    
     InstructionMemory #(
         .MEM_FILE(MEM_FILE)
     ) u_inst_mem (
@@ -46,6 +48,7 @@ module SingleCycleProcessor #(
 
 
     // ============= ID ============= 
+    (* dont_touch = "true" *)
     ControlUnit u_control (
         .Instr (Instr),
         .RegWrite (RegWrite),
@@ -59,7 +62,7 @@ module SingleCycleProcessor #(
         .Jalr (Jalr),
         .Halt (Halt)
     );
-
+(* dont_touch = "true" *)
     RegisterFile u_reg_file (
         .clk (clk),
         .WE3 (RegWrite),
@@ -70,7 +73,7 @@ module SingleCycleProcessor #(
         .RD1 (RD1),
         .RD2 (RD2)
     );
-
+(* dont_touch = "true" *)
     ImmGen u_imm_gen (
         .Instr (Instr),
         .ImmSrc (ImmSrc),
@@ -79,7 +82,7 @@ module SingleCycleProcessor #(
 
     // ============= EX ============= 
     assign SrcB = (ALUSrc == ALU_SRC_IMM ? ImmExt : RD2);
-
+(* dont_touch = "true" *)
     ALU u_alu (
         .SrcA (RD1),
         .SrcB (SrcB),
@@ -98,6 +101,7 @@ module SingleCycleProcessor #(
 
     // ============= MEM ============= 
     assign WriteData = RD2;
+    (* dont_touch = "true" *)
     DataMemory u_memory (
         .clk (clk),
         .WE (MemWrite),

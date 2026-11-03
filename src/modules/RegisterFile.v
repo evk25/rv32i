@@ -25,7 +25,7 @@ module RegisterFile (
             rf[i] = 32'b0;
         end
 
-    //  rf[2] = 32'd1024; // program 3 stack pointer assignment 
+    //  rf[2] = 32'd1024; // program 3 stack pointer assignment (not needed)
     end
 
     always @(posedge clk) begin
