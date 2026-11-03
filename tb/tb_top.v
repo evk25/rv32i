@@ -9,21 +9,21 @@ module tb_top();
 
     always #1 clk = ~clk;
 
-    // SingleCycleProcessor #(
-    //     .MEM_FILE(MEM_FILE)
-    // ) uut (
-    //     .clk  (clk),
-    //     .rst  (rst),
-    //     .Halt (Halt)
-    // );
-
-    MultiCycleProcessor #(
+    SingleCycleProcessor #(
         .MEM_FILE(MEM_FILE)
     ) uut (
-        .clk (clk),
-        .rst (rst),
+        .clk  (clk),
+        .rst  (rst),
         .Halt (Halt)
     );
+
+    // MultiCycleProcessor #(
+    //     .MEM_FILE(MEM_FILE)
+    // ) uut (
+    //     .clk (clk),
+    //     .rst (rst),
+    //     .Halt (Halt)
+    // );
 
     // Dump all processor signals plus RegisterFile and DataMemory words
     integer i;
